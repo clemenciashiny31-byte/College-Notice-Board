@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Admin Login - Notice Board{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="login-icon">🔐</div>
+        <h1>Administrator Login</h1>
+        <p>Login to publish and manage college announcements.</p>
+
+        <form method="POST">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <button type="submit" class="btn full">Login</button>
+        </form>
+
+        <div class="demo-box">
+            <strong>Demo Login</strong>
+            <br>Username: <b>admin</b>
+            <br>Password: <b>admin123</b>
+        </div>
+    </div>
+</div>
+{% endblock %}

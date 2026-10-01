@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Publish Notice - Notice Board{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-card">
+        <a href="{{ url_for('admin_dashboard') }}" class="back">← Back to Dashboard</a>
+        <h1>Publish Announcement</h1>
+        <p>Enter the announcement details below. Students will see it immediately after publishing.</p>
+
+        <form method="POST">
+            <label>Announcement Title</label>
+            <input type="text" name="title" placeholder="Example: Semester Examination Schedule" required>
+
+            <label>Category</label>
+            <select name="category" required>
+                <option value="">Select category</option>
+                <option value="General">General</option>
+                <option value="Exam">Exam</option>
+                <option value="Event">Event</option>
+                <option value="Placement">Placement</option>
+                <option value="Academic">Academic</option>
+                <option value="Holiday">Holiday</option>
+                <option value="Important">Important</option>
+            </select>
+
+            <label>Announcement Content</label>
+            <textarea name="content" rows="8" placeholder="Write the complete announcement here..." required></textarea>
+
+            <button type="submit" class="btn full">📢 Publish Announcement</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

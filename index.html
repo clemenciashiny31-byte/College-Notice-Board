@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Home - College Notice Board{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">DIGITAL CAMPUS INFORMATION</p>
+        <h1>College Digital Notice Board</h1>
+        <p>View important college announcements, examination updates, events, placement information and more in one place.</p>
+    </div>
+</section>
+
+<div class="section-heading">
+    <div>
+        <h2>Latest Announcements</h2>
+        <p>Stay updated with the latest college information.</p>
+    </div>
+    <span class="notice-count">{{ notices|length }} Notices</span>
+</div>
+
+{% if notices %}
+<div class="notice-grid">
+    {% for notice in notices %}
+    <article class="notice-card">
+        <div class="card-top">
+            <span class="category">{{ notice['category'] }}</span>
+            <span class="date">{{ notice['created_at'] }}</span>
+        </div>
+        <h3>{{ notice['title'] }}</h3>
+        <p>{{ notice['content'][:180] }}{% if notice['content']|length > 180 %}...{% endif %}</p>
+        <div class="card-bottom">
+            <span>Posted by {{ notice['posted_by'] }}</span>
+            <a href="{{ url_for('notice_detail', notice_id=notice['id']) }}">Read More →</a>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty">
+    <h3>No announcements available</h3>
+    <p>New announcements will appear here when the administrator publishes them.</p>
+</div>
+{% endif %}
+{% endblock %}

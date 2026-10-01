@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ notice['title'] }} - Notice Board{% endblock %}
+
+{% block content %}
+<div class="detail-card">
+    <a href="{{ url_for('index') }}" class="back">← Back to Notices</a>
+    <div class="detail-meta">
+        <span class="category">{{ notice['category'] }}</span>
+        <span>{{ notice['created_at'] }}</span>
+    </div>
+    <h1>{{ notice['title'] }}</h1>
+    <p class="posted">Posted by <strong>{{ notice['posted_by'] }}</strong></p>
+    <div class="notice-content">{{ notice['content'] }}</div>
+</div>
+{% endblock %}

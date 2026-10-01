@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - Notice Board{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <div>
+        <p class="eyebrow">ADMIN PANEL</p>
+        <h1>Announcement Management</h1>
+        <p>Publish and manage announcements for students.</p>
+    </div>
+    <a href="{{ url_for('add_notice') }}" class="btn">+ Publish New Notice</a>
+</div>
+
+<div class="stats">
+    <div class="stat-card">
+        <span>Total Notices</span>
+        <strong>{{ notices|length }}</strong>
+    </div>
+    <div class="stat-card">
+        <span>Administrator</span>
+        <strong>{{ session.get('admin_username') }}</strong>
+    </div>
+</div>
+
+<div class="admin-table-wrapper">
+    {% if notices %}
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Posted On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notice in notices %}
+            <tr>
+                <td><strong>{{ notice['title'] }}</strong></td>
+                <td><span class="category">{{ notice['category'] }}</span></td>
+                <td>{{ notice['created_at'] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_notice', notice_id=notice['id']) }}" onsubmit="return confirm('Delete this notice?');">
+                        <button class="delete-btn" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty">
+        <h3>No notices yet</h3>
+        <a href="{{ url_for('add_notice') }}" class="btn">Publish First Notice</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
